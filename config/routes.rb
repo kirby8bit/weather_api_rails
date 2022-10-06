@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           get "/historical/min", to: 'wheather#min'
           get "/historical/max", to: 'wheather#max'
           get "/historical/avg", to: 'wheather#avg'
+          get "/by_time/:epochTime", to: 'wheather#by_time'
         end
       end
     end

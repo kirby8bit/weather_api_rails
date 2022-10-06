@@ -26,6 +26,21 @@ module API
         indications = (WheatherUpdater.call.pluck(:temperature).sum/24).round(2)
         render json: { action: "avg temperature by 24 hours in Moscow", data: indications  }, status: 200
       end
+
+      def by_time
+        indications = Indication.find_by(epochTime: actual_params[:epochTime])
+        if indications.present?
+          render json: { action: " temperature by this time in Moscow", data: indications  }, status: 200
+        else
+          render json: { message: "temperature by this time is not found" }, status: 404
+        end
+      end
+
+      private
+
+      def actual_params
+        params.permit(:epochTime)
+      end
     end
   end
 end
