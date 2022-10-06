@@ -7,3 +7,4 @@ en:
   current: "current temperature in Moscow"
   historical: "temperature by 24 hours in Moscow"
   health: "Service is working !"
+  health_error: "Service is not working :("

@@ -2,7 +2,7 @@ module API
   module V1
     class WheatherController < ApplicationController
       def historical
-        indications = WheatherUpdater.call
+        indications = Indication.last(24)
         render json: { action: I18n.t(:historical), data: indications  }, status: 200
       end
 
@@ -12,17 +12,17 @@ module API
       end
 
       def min
-        indications = Indication.where(id: WheatherUpdater.call.pluck(:id)).order(temperature: :asc).first
+        indications = Indication.where(id: Indication.last(24).pluck(:id)).order(temperature: :asc).first
         render json: { action: I18n.t(:min), data: indications  }, status: 200
       end
 
       def max
-        indications = Indication.where(id: WheatherUpdater.call.pluck(:id)).order(temperature: :desc).first
+        indications = Indication.where(id: Indication.last(24).pluck(:id)).order(temperature: :desc).first
         render json: { action: I18n.t(:max), data: indications  }, status: 200
       end
 
       def avg
-        indications = (WheatherUpdater.call.pluck(:temperature).sum/24).round(2)
+        indications = (Indication.last(24).pluck(:temperature).sum/24).round(2)
         render json: { action: I18n.t(:avg), data: indications  }, status: 200
       end
 

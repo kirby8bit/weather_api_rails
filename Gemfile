@@ -10,6 +10,7 @@ gem "bootsnap", require: false
 gem "dotenv-rails"
 gem "httparty"
 gem 'i18n'
+gem 'whenever', require: false
 
 group :development, :test do
   gem "pry-rails"
