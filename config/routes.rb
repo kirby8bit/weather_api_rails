@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           get "/by_time/:epochTime", to: 'wheather#by_time'
         end
       end
+      resources :health, only: :index
     end
   end
 end
