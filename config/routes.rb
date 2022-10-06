@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api do
+    namespace :v1 do
+      resources :wheather do
+        collection do
+          get :historical
+          get :current
+          get "/historical/min", to: 'wheather#min'
+          get "/historical/max", to: 'wheather#max'
+          get "/historical/avg", to: 'wheather#avg'
+        end
+      end
+    end
+  end
 end

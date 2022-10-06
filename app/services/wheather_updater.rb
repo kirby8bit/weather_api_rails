@@ -8,30 +8,44 @@ class WheatherUpdater
   end
 
   def call
-    #получим сначала по Москве ключ:
-    key = HTTParty
-      .get("#{BASE_URL}/locations/v1/cities/search", query: {apikey: APP_ID, q: CITY})[0]["Key"]
 
-    #получим по ключу города текущую температуру:
+    get_key
 
-    temperature_hour =
-      {
-        tempreture: HTTParty
-          .get("#{BASE_URL}/currentconditions/v1/#{key}", query: {apikey: APP_ID}).first["Temperature"]["Metric"]["Value"],
-        date:  HTTParty
-          .get("#{BASE_URL}/currentconditions/v1/#{key}", query: {apikey: APP_ID}).first["LocalObservationDateTime"]
-      }
-
-
-    temperature_24_hours = HTTParty
-      .get("#{BASE_URL}/currentconditions/v1/#{key}/historical/24", query: {apikey: APP_ID}).map do | temperature |
+    temperature_24_hours = tf_hours_list.map do | temperature |
         {
           temperature: temperature["Temperature"]["Metric"]["Value"],
-          date: temperature["LocalObservationDateTime"]
+          unit: temperature["Temperature"]["Metric"]["Unit"],
+          epochTime: temperature["EpochTime"]
         }
-      end
+    end
 
-    binding.pry
+    ActiveRecord::Base.transaction do
+      temperature_24_hours.each do | temperature |
+        Indication
+          .find_or_initialize_by(epochTime: temperature[:epochTime])
+          .update(
+            temperature: temperature[:temperature],
+            unit: temperature[:unit]
+          )
+      end
+    end
+
+    Indication.last(24)
   end
 
+  private
+
+  def get_key
+    @key ||= HTTParty
+    .get("#{BASE_URL}/locations/v1/cities/search", query: {apikey: APP_ID, q: CITY})[0]["Key"]
+  end
+
+  def tf_hours_list
+    @tf_hours_list ||= send_request(@key)
+  end
+
+  def send_request(key)
+    HTTParty
+    .get("#{BASE_URL}/currentconditions/v1/#{key}/historical/24", query: {apikey: APP_ID})
+  end
 end
