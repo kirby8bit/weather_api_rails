@@ -29,6 +29,21 @@ describe "Wheather API" do
           }
         end
 
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
+        end
+
         run_test! do
           expect(parsed_response).to eq(expected_response)
         end
@@ -72,6 +87,21 @@ describe "Wheather API" do
           }
         end
 
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
+        end
+
         run_test! do
           expect(parsed_response).to eq(expected_response)
         end
@@ -101,6 +131,21 @@ describe "Wheather API" do
                 "epochTime": 1665075480
             }
           }
+        end
+
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
         end
 
         run_test! do
@@ -134,6 +179,21 @@ describe "Wheather API" do
           }
         end
 
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
+        end
+
         run_test! do
           expect(parsed_response).to eq(expected_response)
         end
@@ -159,6 +219,21 @@ describe "Wheather API" do
             "action": "avg temperature by 24 hours in Moscow",
             "data": 1.38
           }
+        end
+
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
         end
 
         run_test! do
@@ -196,6 +271,21 @@ describe "Wheather API" do
         }
         end
 
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
+        end
+
         run_test! do
           expect(parsed_response).to eq(expected_response)
         end
@@ -223,6 +313,21 @@ describe "Wheather API" do
           {
             "message": "temperature by this time is not found"
           }
+        end
+
+        after do |example|
+          content = example.metadata[:response][:content] || {}
+          example_spec = {
+            'application/json' => {
+              examples: {
+                success_example: {
+                  value: parsed_response,
+                },
+              },
+              schema: example.metadata[:response][:schema],
+            },
+          }
+          example.metadata[:response][:content] = content.deep_merge(example_spec)
         end
 
         run_test! do

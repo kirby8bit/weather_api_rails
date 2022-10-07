@@ -10,6 +10,8 @@ gem "bootsnap", require: false
 gem "dotenv-rails"
 gem "httparty"
 gem 'i18n'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
   gem "pry-rails"

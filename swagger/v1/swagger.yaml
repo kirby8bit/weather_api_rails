@@ -1,0 +1,212 @@
+---
+openapi: 3.0.1
+info:
+  title: weather API V1
+  version: v1
+paths:
+  "/api/v1/health":
+    get:
+      summary: return status
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    message: Service is working !
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: service is working
+                  required:
+                  - message
+  "/api/v1/wheather/historical":
+    get:
+      summary: return indications list
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    action: temperature by 24 hours in Moscow
+                    data:
+                    - temperature: 10.8
+                      unit: C
+                      epochTime: 1665075480
+                    - temperature: 10.9
+                      unit: C
+                      epochTime: 1665071880
+                    - temperature: 11.5
+                      unit: C
+                      epochTime: 1665068340
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      description: action message
+                    data:
+                      type: array
+                      description: indications
+                  required:
+                  - action
+                  - data
+  "/api/v1/wheather/historical/min":
+    get:
+      summary: 'return min temperature by 24 hours in Moscow '
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    action: min temperature by 24 hours in Moscow
+                    data:
+                      temperature: 10.8
+                      unit: C
+                      epochTime: 1665075480
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      description: action message
+                    data:
+                      type: object
+                      description: indications
+                  required:
+                  - action
+                  - data
+  "/api/v1/wheather/historical/max":
+    get:
+      summary: 'return min temperature by 24 hours in Moscow '
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    action: max temperature by 24 hours in Moscow
+                    data:
+                      temperature: 11.5
+                      unit: C
+                      epochTime: 1665068340
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      description: action message
+                    data:
+                      type: object
+                      description: indications
+                  required:
+                  - action
+                  - data
+  "/api/v1/wheather/historical/avg":
+    get:
+      summary: 'return min temperature by 24 hours in Moscow '
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    action: avg temperature by 24 hours in Moscow
+                    data: 1.38
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      description: action message
+                    data:
+                      type: integer
+                      description: avg
+                  required:
+                  - action
+                  - data
+  "/api/v1/wheather/by_time/{epochTime}":
+    get:
+      summary: return temperature by this time
+      parameters:
+      - name: epochTime
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: time
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    action: temperature by this time in Moscow
+                    data:
+                      temperature: 11.5
+                      unit: C
+                      epochTime: 1665068340
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      description: action message
+                    data:
+                      type: object
+                      description: temperaute by this time
+                  required:
+                  - action
+                  - data
+        '404':
+          description: bad request
+          content:
+            application/json:
+              examples:
+                success_example:
+                  value:
+                    message: temperature by this time is not found
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      description: error message
+                  required:
+                  - action
+                  - data
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

@@ -210,9 +210,14 @@ GEM
       zeitwerk (~> 2.5)
     rake (13.0.6)
     rexml (3.2.5)
+    rswag-api (2.6.0)
+      railties (>= 3.1, < 7.1)
     rswag-specs (2.6.0)
       activesupport (>= 3.1, < 7.1)
       json-schema (~> 2.2)
+      railties (>= 3.1, < 7.1)
+    rswag-ui (2.6.0)
+      actionpack (>= 3.1, < 7.1)
       railties (>= 3.1, < 7.1)
     shoulda-matchers (5.2.0)
       activesupport (>= 5.2.0)
@@ -248,7 +253,9 @@ DEPENDENCIES
   rspec-mocks!
   rspec-rails!
   rspec-support!
+  rswag-api
   rswag-specs
+  rswag-ui
   shoulda-matchers
   tzinfo-data
   vcr
