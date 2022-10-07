@@ -29,8 +29,6 @@ class WheatherUpdater
           )
       end
     end
-
-    Indication.last(24)
   end
 
   private

@@ -1,7 +1,4 @@
-class CurrentWheatherUpdater
-  BASE_URL = 'http://dataservice.accuweather.com'.freeze
-  APP_ID = ENV.fetch('WHEATHER_APP_ID').freeze
-  CITY = ENV.fetch('CITY').freeze
+class CurrentWheatherUpdater < WheatherUpdater
 
   def self.call
     new.call
@@ -29,11 +26,6 @@ class CurrentWheatherUpdater
   end
 
   private
-
-  def get_key
-    @key ||= HTTParty
-    .get("#{BASE_URL}/locations/v1/cities/search", query: {apikey: APP_ID, q: CITY})[0]["Key"]
-  end
 
   def one_hour_list
     @one_hour_list ||= send_request(@key)

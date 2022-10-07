@@ -10,8 +10,17 @@ gem "bootsnap", require: false
 gem "dotenv-rails"
 gem "httparty"
 gem 'i18n'
-gem 'whenever', require: false
 
 group :development, :test do
   gem "pry-rails"
+  gem "factory_bot_rails"
+  gem 'shoulda-matchers'
+
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'main'
+  end
+
+  gem "vcr"
+  gem "webmock"
+  gem "rswag-specs"
 end
