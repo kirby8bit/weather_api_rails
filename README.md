@@ -1,24 +1,90 @@
-# README
+# Weather api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<p align="center">
+      <img src="https://ibb.co/T8xLq9j" width="726">
+</p>
 
-Things you may want to cover:
+<p align="center">
+   <img src="https://img.shields.io/badge/ruby%20version-3.1.2-green" alt="Ruby Version">
+   <img src="https://img.shields.io/badge/rails%20version-7.0.4-brightgreen" alt="Rails Version">
+</p>
 
-* Ruby version
+### Описание
 
-* System dependencies
+Приложение написано в рамках выполнения тестового задания. С какого-то момента я ошибся в написании названия слово "weather" и начал его писать как "wheather", решил уже оставить в таком виде, хоть в api-docs это видно, решил на всякий случай предупредить:))
 
-* Configuration
+### Содержание тестового задания:
 
-* Database creation
+Как источник данных можно использовать https://developer.accuweather.com/apis. Город можно использовать любой (можно захардкодить). Законченный код передать в виде приватного репозитория на GitHub. API открыт для всех, авторизация не нужна. Ожидаемая нагрузка на любой эндпоинт: 5 RPS
 
-* Database initialization
+### Endpoints:
 
-* How to run the test suite
+* wheather/current - Текущая температура
 
-* Services (job queues, cache servers, search engines, etc.)
+* /wheather/historical - Почасовая температура за последние 24 часа (https://developer.accuweather.com/accuweather-curr…)
 
-* Deployment instructions
+* /wheather/historical/max - Максимальная темперетура за 24 часа
 
-* ...
+* /wheather/historical/min - Минимальная темперетура за 24 часа
+
+* /wheather/historical/avg - Средняя темперетура за 24 часа
+
+* /wheather/by_time - Найти температуру ближайшую к переданному timestamp (например 1621823790 должен отдать температуру за 2021-05-24 08:00. Из имеющихся данных, если такого времени нет вернуть 404)
+
+* /health - Статус бекенда (Можно всегда отвечать OK)
+
+Должны быть интеграционные тесты на эндпоинты и юнит тесты на общие классы/модули. Рекомендуется хранить данные о температуре локально для снижения нагрузки на сторонний API.
+
+Приветствуется использование swagger документации, Docker, использование кэширования и Trailblazer.
+
+### Ruby version
+
+```
+ruby 3.1.2
+```
+
+### Rails version
+
+```
+rails 7.0.4
+```
+
+Postgresql version
+
+```
+PostgreSQL 12.9
+```
+
+## Первый запуск
+
+```
+gem install bundler
+bundle install
+bundle exec rails db:create
+bundle exec rails db:migrate
+copy .env.template .env
+```
+
+Заполнить переменные окружения в `.env`
+
+### Загрузить данные с [AccuWeather](https://developer.accuweather.com/)
+
+```
+bundle exec rake indications:update
+```
+
+### Запуск сервера
+
+```
+bundle exec rails s
+```
+
+### Тесты
+
+```
+bundle exec rspec
+```
+
+## Документация API
+
+Примеры запросов доступны по адресу http://localhost:3000/api-docs
