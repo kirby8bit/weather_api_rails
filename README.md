@@ -21,7 +21,7 @@
 
 * wheather/current - Текущая температура
 
-* /wheather/historical - Почасовая температура за последние 24 часа (https://developer.accuweather.com/accuweather-curr…)
+* /wheather/historical - Почасовая температура за последние 24 часа (https://developer.accuweather.com/accuweather-current-conditions-api/apis/get/currentconditions/v1/%7BlocationKey%7D/historical/24)
 
 * /wheather/historical/max - Максимальная темперетура за 24 часа
 
