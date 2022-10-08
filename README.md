@@ -1,7 +1,7 @@
 # Weather api
 
 <p align="center">
-      <img src="https://ibb.co/T8xLq9j" width="726">
+      <a href="https://ibb.co/T8xLq9j"><img src="https://i.ibb.co/KqpwzT4/kisspng-weather-forecasting-computer-icons-weather-5ace7698320550-2720845715234802162049.png" alt="kisspng-weather-forecasting-computer-icons-weather-5ace7698320550-2720845715234802162049" border="0" /></a>
 </p>
 
 <p align="center">
